@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Camera/CameraComponent.h"
+#include "Resource_M.h"
 #include "PlayerChar.generated.h"
 
 UCLASS()
@@ -47,8 +48,65 @@ public:
 	// This function will called when the 'Interact' input action is triggered.
 	    void FindObject();
 
+
     UPROPERTY(VisibleAnywhere)
 	// Camera is attached to the player character, makes this component visible in UE5, but cannot be edited. First Person View only.
-	UCameraComponent* PlayerCamComp;
+	   UCameraComponent* PlayerCamComp;
+
+	   // Player Stats
+	UPROPERTY(Editanywhere, BlueprintReadWrite, Category = "Player Stats")
+	   float Health = 100.0f;
+    
+	   // Player Stats
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
+	   float Hunger = 100.0f;
+
+	   // Player Stats
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
+	   float Stamina = 100.0f;
+
+	   // Resource Inventory
+    UPROPERTY(EditAnywhere, Category = "Resources")
+       int Wood;
+
+	   // Resource Inventory
+    UPROPERTY(EditAnywhere, Category = "Resources")
+       int Stone;
+
+	   // Resource Inventory
+    UPROPERTY(EditAnywhere, Category = "Resources")
+       int Berry;
+
+	   // Resource Inventory Array
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
+       TArray<int> ResourcesArray;
+
+	   // Resource Inventory Names
+    UPROPERTY(EditAnywhere, Category = "Resources")
+       TArray<FString> ResourcesNameArray;
+
+	   // Decal for hit marker
+	UPROPERTY(EditAnywhere, Category = "HitMarker")
+		UMaterialInterface* hitDecal;
+
+		// Timer handle for managing the periodic decrease of player stats.
+	UFUNCTION(BlueprintCallable)
+	   void SetHealth(float amount);
+
+	   // Timer handle for managing the periodic decrease of player stats.
+    UFUNCTION(BlueprintCallable)
+	   void SetHunger(float amount);
+
+	   // Timer handle for managing the periodic decrease of player stats.
+	UFUNCTION(BlueprintCallable)
+	   void SetStamina(float amount);
+
+	   // Function to decrease player stats over time.
+	UFUNCTION()
+	   void DecreasedStats();
+	
+	   // Timer handle for managing the periodic decrease of player stats.
+	UFUNCTION()
+		void GiveResource(float amount, FString resourceType);
 
 };
