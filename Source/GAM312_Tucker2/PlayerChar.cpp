@@ -35,6 +35,7 @@ void APlayerChar::BeginPlay()
 
 
 
+
 }
 
 // Called every frame
@@ -91,6 +92,7 @@ void APlayerChar::StopJump()
 }
 
 void APlayerChar::FindObject()
+
 {   // Line trace (raycast) to find interactable objects in front of the player.
 	FHitResult HitResult;
 	FVector StartLocation = PlayerCamComp->GetComponentLocation();
@@ -135,16 +137,13 @@ void APlayerChar::FindObject()
 					// Reduce player's stamina for the action.
 					SetStamina(-5.0f);
 				}
-
-		}
-
-		
-			else
-			{
-				// If the resource is depleted, destroy the resource actor and notify the player.
-				HitResource->Destroy();
-				check(GEngine != nullptr);
-				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Resource Depleted"));
+				else
+				{
+					// If the resource is depleted, destroy the resource actor and notify the player.
+					HitResource->Destroy();
+					check(GEngine != nullptr);
+					GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Resource Depleted"));
+				}
 			}
 		}
 	}
