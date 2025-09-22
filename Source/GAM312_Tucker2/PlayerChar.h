@@ -8,6 +8,7 @@
 #include "Resource_M.h"
 #include "Kismet/GameplayStatics.h"
 #include "BuildingPart.h"
+#include "PlayerWidget.h"
 #include "PlayerChar.generated.h"
 
 UCLASS()
@@ -107,6 +108,9 @@ public:
 	UPROPERTY()
 		ABuildingPart* spawnedPart;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UPlayerWidget* playerUI;
+
 		// Timer handle for managing the periodic decrease of player stats.
 	UFUNCTION(BlueprintCallable)
 	   void SetHealth(float amount);
@@ -130,9 +134,11 @@ public:
 	// Function to update resources when building structures.
 	UFUNCTION(BlueprintCallable)
 		void UpdateResources(float woodAmount, float stoneAmount, FString buildingObject);
+
 	// Function to spawn a building part based on the provided building ID.
 	UFUNCTION(BlueprintCallable)
 		void SpawnBuilding(int buildingID, bool& isSuccess);
+
 	// Function to rotate the building part being placed.
 	UFUNCTION()
 		void RotateBuilding();
