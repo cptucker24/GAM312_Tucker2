@@ -34,7 +34,7 @@ void APlayerChar::BeginPlay()
 	FTimerHandle StatsTimerHandle;
 	GetWorld()->GetTimerManager().SetTimer(StatsTimerHandle, this, &APlayerChar::DecreasedStats, 2.0f, true);
 
-	// Sets the initial values to zero
+	// Sets the initial values to zero (Week Five)
 	if (objWidget)
 	{
 		objWidget->UpdatebuildObj(0.0f);
@@ -150,8 +150,10 @@ void APlayerChar::FindObject()
 					{
 						GiveResource(resourceValue, hitName);
 
+						// Update the player's UI with the collected resources. (Week Five)
 						matsCollected = matsCollected + resourceValue;
 
+						// Update the objective widget with the new material count. (Week Five)
 						objWidget->UpdatematOBJ(matsCollected);
 
 						// Debug message to indicate resource collection.
