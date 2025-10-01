@@ -4,19 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "PlayerWidget.generated.h"
+#include "ObjectiveWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class GAM312_TUCKER2_API UPlayerWidget : public UUserWidget
+class GAM312_TUCKER2_API UObjectiveWidget : public UUserWidget
 {
 	GENERATED_BODY()
- 
-// Function to update health, hunger, and stamina bars on the UI
+
 public:
 	UFUNCTION(BlueprintImplementableEvent)
-	void UpdateBars(float Health1, float Hunger1, float Stamina1);
+		void UpdatematOBJ(float matsCollected);
 
+	UFUNCTION(BlueprintImplementableEvent)
+		void UpdatebuildObj(float objectsBuilt);
 };

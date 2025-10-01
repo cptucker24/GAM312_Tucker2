@@ -9,6 +9,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "BuildingPart.h"
 #include "PlayerWidget.h"
+#include "ObjectiveWidget.h"
 #include "PlayerChar.generated.h"
 
 UCLASS()
@@ -108,8 +109,18 @@ public:
 	UPROPERTY()
 		ABuildingPart* spawnedPart;
 
+		// Reference to the player UI widget for updating health, hunger, and stamina bars.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UPlayerWidget* playerUI;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UObjectiveWidget* objWidget;
+
+	UPROPERTY()
+		float objectsBuilt;
+
+	UPROPERTY()
+		float matsCollected;
 
 		// Timer handle for managing the periodic decrease of player stats.
 	UFUNCTION(BlueprintCallable)

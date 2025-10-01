@@ -34,7 +34,12 @@ void APlayerChar::BeginPlay()
 	FTimerHandle StatsTimerHandle;
 	GetWorld()->GetTimerManager().SetTimer(StatsTimerHandle, this, &APlayerChar::DecreasedStats, 2.0f, true);
 
-
+	// Sets the initial values to zero
+	if (objWidget)
+	{
+		objWidget->UpdatebuildObj(0.0f);
+		objWidget->UpdatematOBJ(0.0f);
+	}
 
 
 }
@@ -44,6 +49,7 @@ void APlayerChar::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	// Update the player UI with current health, hunger, and stamina values.
 	playerUI->UpdateBars(Health, Hunger, Stamina);
 
 	if (isBuilding)
@@ -144,6 +150,10 @@ void APlayerChar::FindObject()
 					{
 						GiveResource(resourceValue, hitName);
 
+						matsCollected = matsCollected + resourceValue;
+
+						objWidget->UpdatematOBJ(matsCollected);
+
 						// Debug message to indicate resource collection.
 						check(GEngine != nullptr);
 						GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Resource Collected"));
@@ -167,8 +177,11 @@ void APlayerChar::FindObject()
 	}
 
 	else
-	{
+	{ // 
 		isBuilding = false;
+		objectsBuilt = objectsBuilt + 1.0f;
+
+		objWidget->UpdatebuildObj(objectsBuilt);
 		
 	}
 	
